@@ -271,7 +271,7 @@ if test "$ac_env_CFLAGS_set" = set; then
 elif test "${CFLAGS+set}" = set; then
   : # (keep what template set)
 elif test "$GCC" = yes; then
-  CFLAGS="-O2"
+  CFLAGS="-O2 -fno-aggressive-loop-optimizations"
 else
   # if the user selected debug mode, don't use -O
   if test "$enable_debug" != yes; then
