@@ -297,7 +297,7 @@ elif test "$ICC" = yes; then
   # division by NAN (NaN == 0), -mp1 fixes it, so add it to the CFLAGS.
   PGAC_PROG_CC_CFLAGS_OPT([-mp1])
   # Make sure strict aliasing is off (though this is said to be the default)
-  PGAC_PROG_CC_CFLAGS_OPT([-fno-strict-aliasing])
+  PGAC_PROG_CC_CFLAGS_OPT([-fno-strict-aliasing -fno-aggressive-loop-optimizations])
 elif test x"${CC}" = x"xlc"; then
   # AIX xlc has to have strict aliasing turned off too
   PGAC_PROG_CC_CFLAGS_OPT([-qnoansialias])
