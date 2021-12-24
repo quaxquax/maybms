@@ -301,21 +301,23 @@ process_select(SelectStmt *sel)
 	/* Transform the targetList so that no "*" appears in it. */
  	transform_targetList(typeArray, tripleCount, fields, result);
 
+	// #################### The following block of code causes tests to fail - select with conf() throw this error 
 	/* If all relations in the fromClause are certain, confidence computation
 	 * operators simply returns 1 without doing any rewriting.
 	 */
-	 if (all_relations_are_certain(list_length(result->fromClause), typeArray) 
-	 	&& result->repairkey == NULL && result->pickingType != 'I' && !result->possible)
-	 {
+	//	 if (all_relations_are_certain(list_length(result->fromClause), typeArray) 
+	//	 	&& result->repairkey == NULL && result->pickingType != 'I' && !result->possible)
+	//	 {
 	 	/* If any of the following is not NULL, set its agg_star to true. */
-	 	if ( tconf != NULL || conf != NULL || aconf != NULL )
-	 		elog(ERROR, "Query not supported: tconf, conf, aconf, esum and ecount cannot used be in a certain query");
-	 }
+	//	 	if ( tconf != NULL || conf != NULL || aconf != NULL )
+	//	 		elog(ERROR, "Query not supported: tconf, conf, aconf, esum and ecount cannot used be in a certain query");
+			//	 }
 
+	// ################### The following comment does not inspire confidence and hence this condition is also disabled
 	/* If any of this confidence computation operators are used, the SELECT are certain. */
 	/* TODO: This may be wrong, we should take into account where clause. */
-	if (tconf != NULL || conf != NULL || aconf != NULL)
-		isCertainSel = true;
+	//	if (tconf != NULL || conf != NULL || aconf != NULL)
+	//		isCertainSel = true;
 
 	/* Processing of tconf */
 	if(tconf != NULL)
